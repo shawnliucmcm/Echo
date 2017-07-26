@@ -1,3 +1,5 @@
+pragma solidity ^0.4.11;
+
 contract Credential
 {
     // Credential data variables
@@ -15,17 +17,17 @@ contract Credential
     }
     modifier onlyowner() { 
         if (msg.sender == owner)
-            _
+            _;
     }
 
     // Create initial credential contract
-    function createCredential(bytes32 issuerEntry, bytes32 recipientEntry, uint256 credentialDateEntry, bytes32 credentialEntry, bytes32 descriptionEntry) onlyowner
+    function createCredential(bytes32 issuerEntry, bytes32 recipientEntry, uint256 credentialDateEntry, bytes32 credentialEntry, bytes32 statusEntry, bytes32 descriptionEntry) onlyowner
     {
         issuer = issuerEntry;
         recipient = recipientEntry;
         credentialDate = credentialDateEntry;
         setStatus(statusEntry);
-        bytes32 name = “Credential Contract Creation";
+        bytes32 name = "Credential Contract Creation";
         
         majorEventFunc(credentialDate, name, descriptionEntry);
     }
@@ -53,7 +55,7 @@ contract Credential
     function credentialProof(bytes IPFSProofHash) onlyowner
     {
         credentialProofDoc = IPFSProofHash;
-        majorEventFunc(block.timestamp, "Entered Credential Proof", “Credential proof in IPFS");
+        majorEventFunc(block.timestamp, "Entered Credential Proof", "Credential proof in IPFS");
     }
 
     // Log major events
@@ -69,6 +71,6 @@ contract Credential
     // the contract or just ether without data. We revert the send so that no-one
     // accidentally loses money when using the contract.
     function () {
-        throw;
+
     }
 }
