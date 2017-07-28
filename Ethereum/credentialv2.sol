@@ -47,17 +47,28 @@ contract Credential is owned {
     // Set the IPFS hash of the image of the recipient
     function setImage(bytes32 IPFSImageHash) onlyowner
     {
+        #ToDo add IPFS hash check
         info.imageHash = IPFSImageHash;
         majorEventFunc(block.timestamp, "Entered Recipient Image", "Image is in IPFS");
     }
-    
+
+    // Get the IPFS hash of the crendential
+    function getIPFSImageHash() {
+        return info.imageHash;    
+    }
+
     // Upload documentation for proof of credential - e.g. graduation certificate
     function credentialProof(bytes32 IPFSProofHash) onlyowner
     {
+        #ToDo add credential Hash validity check
         info.credentialProofDoc = IPFSProofHash;
         majorEventFunc(block.timestamp, "Entered Credential Proof", "Credential proof in IPFS");
     }
 
+    // Get the credential hash
+    function getProofHash() {
+        return info.credentialProofDoc;
+    } 
     // Log major events
     function majorEventFunc(uint256 eventTimeStamp, bytes32 name, bytes32 description)
     {
